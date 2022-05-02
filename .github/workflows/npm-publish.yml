@@ -15,15 +15,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: echo "$NODE_AUTH_TOKEN"
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: yarn
       - run: yarn build
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    environment: npm
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
